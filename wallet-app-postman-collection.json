@@ -1,0 +1,578 @@
+{
+	"info": {
+		"_postman_id": "c8ae3b7a-44d6-4e5a-a9e2-b4de25e7f9e1",
+		"name": "Wallet App API",
+		"description": "API collection for the Wallet App Service with Request-ID tracking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Deposit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Request-Id",
+						"value": "{{requestId}}",
+						"description": "Optional unique ID for this request"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"amount\": 500,\n    \"comment\": \"Initial deposit\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/deposit",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deposit"
+					]
+				},
+				"description": "Deposit money into a user's wallet."
+			},
+			"response": [
+				{
+					"name": "Successful Deposit",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Request-Id",
+								"value": "test-request-123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"amount\": 500,\n    \"comment\": \"Initial deposit\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/deposit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deposit"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Request-Id",
+							"value": "test-request-123"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request_id\": \"test-request-123\",\n    \"data\": {\n        \"id\": 1,\n        \"wallet_id\": 1,\n        \"dest_wallet_id\": null,\n        \"type\": \"DEPOSIT\",\n        \"amount\": 500,\n        \"balance_before\": 1000,\n        \"balance_after\": 1500,\n        \"description\": \"Initial deposit\",\n        \"transaction_time\": \"2023-05-12T10:30:45Z\",\n        \"created_at\": \"2023-05-12T10:30:45Z\"\n    }\n}"
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Request-Id",
+								"value": "test-request-123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"amount\": -500,\n    \"comment\": \"Negative amount\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/deposit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"deposit"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Request-Id",
+							"value": "test-request-123"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request_id\": \"test-request-123\",\n    \"error\": \"Amount must be positive\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Withdraw",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Request-Id",
+						"value": "{{requestId}}",
+						"description": "Optional unique ID for this request"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"amount\": 200,\n    \"comment\": \"ATM withdrawal\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/withdraw",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"withdraw"
+					]
+				},
+				"description": "Withdraw money from a user's wallet."
+			},
+			"response": [
+				{
+					"name": "Successful Withdrawal",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Request-Id",
+								"value": "test-request-456"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"amount\": 200,\n    \"comment\": \"ATM withdrawal\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/withdraw",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"withdraw"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Request-Id",
+							"value": "test-request-456"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request_id\": \"test-request-456\",\n    \"data\": {\n        \"id\": 2,\n        \"wallet_id\": 1,\n        \"dest_wallet_id\": null,\n        \"type\": \"WITHDRAWAL\",\n        \"amount\": 200,\n        \"balance_before\": 1500,\n        \"balance_after\": 1300,\n        \"description\": \"ATM withdrawal\",\n        \"transaction_time\": \"2023-05-12T10:45:22Z\",\n        \"created_at\": \"2023-05-12T10:45:22Z\"\n    }\n}"
+				},
+				{
+					"name": "Insufficient Balance",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Request-Id",
+								"value": "test-request-456"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"amount\": 2000,\n    \"comment\": \"Exceeds balance\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/withdraw",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"withdraw"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Request-Id",
+							"value": "test-request-456"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request_id\": \"test-request-456\",\n    \"error\": \"insufficient balance\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Transfer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Request-Id",
+						"value": "{{requestId}}",
+						"description": "Optional unique ID for this request"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sender_id\": 1,\n    \"receiver_id\": 2,\n    \"amount\": 300,\n    \"comment\": \"Dinner payment\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/transfer",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transfer"
+					]
+				},
+				"description": "Transfer money from one user to another."
+			},
+			"response": [
+				{
+					"name": "Successful Transfer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Request-Id",
+								"value": "test-request-789"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sender_id\": 1,\n    \"receiver_id\": 2,\n    \"amount\": 300,\n    \"comment\": \"Dinner payment\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/transfer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transfer"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Request-Id",
+							"value": "test-request-789"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request_id\": \"test-request-789\",\n    \"data\": {\n        \"id\": 3,\n        \"wallet_id\": 1,\n        \"dest_wallet_id\": 2,\n        \"type\": \"TRANSFER\",\n        \"amount\": 300,\n        \"balance_before\": 1300,\n        \"balance_after\": 1000,\n        \"description\": \"Dinner payment\",\n        \"transaction_time\": \"2023-05-12T11:15:30Z\",\n        \"created_at\": \"2023-05-12T11:15:30Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Request-Id",
+						"value": "{{requestId}}",
+						"description": "Optional unique ID for this request"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/balance/:userID",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"balance",
+						":userID"
+					],
+					"variable": [
+						{
+							"key": "userID",
+							"value": "1",
+							"description": "ID of the user"
+						}
+					]
+				},
+				"description": "Get the current balance of a user's wallet."
+			},
+			"response": [
+				{
+					"name": "Successful Balance Retrieval",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Request-Id",
+								"value": "test-request-abc"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/balance/:userID",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"balance",
+								":userID"
+							],
+							"variable": [
+								{
+									"key": "userID",
+									"value": "1",
+									"description": "ID of the user"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Request-Id",
+							"value": "test-request-abc"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request_id\": \"test-request-abc\",\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"balance\": 1000,\n        \"currency\": \"USD\",\n        \"created_at\": \"2023-05-01T08:30:45Z\",\n        \"updated_at\": \"2023-05-12T11:15:30Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Transaction History",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Request-Id",
+						"value": "{{requestId}}",
+						"description": "Optional unique ID for this request"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/transactions/:userID?limit=10&offset=0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						":userID"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10",
+							"description": "Maximum number of transactions to return"
+						},
+						{
+							"key": "offset",
+							"value": "0",
+							"description": "Number of transactions to skip"
+						}
+					],
+					"variable": [
+						{
+							"key": "userID",
+							"value": "1",
+							"description": "ID of the user"
+						}
+					]
+				},
+				"description": "Get the transaction history for a user's wallet."
+			},
+			"response": [
+				{
+					"name": "Successful Transaction History Retrieval",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Request-Id",
+								"value": "test-request-def"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/transactions/:userID?limit=10&offset=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								":userID"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Maximum number of transactions to return"
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"description": "Number of transactions to skip"
+								}
+							],
+							"variable": [
+								{
+									"key": "userID",
+									"value": "1",
+									"description": "ID of the user"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Request-Id",
+							"value": "test-request-def"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"request_id\": \"test-request-def\",\n    \"data\": {\n        \"transactions\": [\n            {\n                \"id\": 3,\n                \"wallet_id\": 1,\n                \"dest_wallet_id\": 2,\n                \"type\": \"TRANSFER\",\n                \"amount\": 300,\n                \"balance_before\": 1300,\n                \"balance_after\": 1000,\n                \"description\": \"Dinner payment\",\n                \"transaction_time\": \"2023-05-12T11:15:30Z\",\n                \"created_at\": \"2023-05-12T11:15:30Z\"\n            },\n            {\n                \"id\": 2,\n                \"wallet_id\": 1,\n                \"dest_wallet_id\": null,\n                \"type\": \"WITHDRAWAL\",\n                \"amount\": 200,\n                \"balance_before\": 1500,\n                \"balance_after\": 1300,\n                \"description\": \"ATM withdrawal\",\n                \"transaction_time\": \"2023-05-12T10:45:22Z\",\n                \"created_at\": \"2023-05-12T10:45:22Z\"\n            },\n            {\n                \"id\": 1,\n                \"wallet_id\": 1,\n                \"dest_wallet_id\": null,\n                \"type\": \"DEPOSIT\",\n                \"amount\": 500,\n                \"balance_before\": 1000,\n                \"balance_after\": 1500,\n                \"description\": \"Initial deposit\",\n                \"transaction_time\": \"2023-05-12T10:30:45Z\",\n                \"created_at\": \"2023-05-12T10:30:45Z\"\n            }\n        ],\n        \"total\": 3,\n        \"limit\": 10,\n        \"offset\": 0\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Generate a unique request ID if not already set",
+					"if (!pm.variables.get(\"requestId\")) {",
+					"    pm.variables.set(\"requestId\", \"test-\" + new Date().getTime());",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Verify that the response contains a request_id",
+					"var jsonData = pm.response.json();",
+					"",
+					"pm.test(\"Response has request_id\", function () {",
+					"    pm.expect(jsonData).to.have.property('request_id');",
+					"});",
+					"",
+					"// Verify that the request_id in the response matches the one we sent",
+					"pm.test(\"Request ID matches\", function () {",
+					"    var requestId = pm.request.headers.get('Request-Id');",
+					"    pm.expect(jsonData.request_id).to.eql(requestId);",
+					"});",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "requestId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

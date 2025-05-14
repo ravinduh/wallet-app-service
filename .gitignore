@@ -1,0 +1,6 @@
+# Go binary outputs
+bin/
+
+
+# Environment files
+.env
